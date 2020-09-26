@@ -161,6 +161,15 @@
 
     </LinearLayout>
 
+    <Button
+        android:id="@+id/btn_vibrate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" "
+        android:background="#ffffff"
+        android:stateListAnimator="@null"
+        tools:ignore="MissingConstraints" />
+
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"

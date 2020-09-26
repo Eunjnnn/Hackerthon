@@ -1,8 +1,10 @@
 package com.example.samplesenti;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -10,8 +12,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MakePostActivity extends AppCompatActivity {
     ImageView companyimage;
@@ -81,19 +88,41 @@ public class MakePostActivity extends AppCompatActivity {
             }
         });
 
+
+
         btnFinish = (Button) findViewById(R.id.btnFinish);
         btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-                Post post = new Post(minMoney.getText().toString(),
-                        maxUser.getText().toString(),
-                        moreInfo.getText().toString(),
-                        endDate.getText().toString());
-                database.child("content").push().setValue(post);
+                String uid, name, email;
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                if (user != null) {
+                    // Name, email address, and profile photo Url
+                    name = user.getDisplayName();
+                    email = user.getEmail();
+                    Uri photoUrl = user.getPhotoUrl();
 
-                Intent in = new Intent(getApplicationContext(), ChatActivity.class);
-                startActivity(in);
+                    // Check if user's email is verified
+                    boolean emailVerified = user.isEmailVerified();
+
+                    // The user's ID, unique to the Firebase project. Do NOT use this value to
+                    // authenticate with your backend server, if you have one. Use
+                    // FirebaseUser.getIdToken() instead.
+                    uid = user.getUid();
+
+                    database.child("content").setValue(uid);
+                    Post post = new Post(minMoney.getText().toString(), //수정 해야함
+                            maxUser.getText().toString(),
+                            moreInfo.getText().toString(),
+                            endDate.getText().toString(),
+                            uid);
+
+                    database.child("content").child(uid).push().setValue(post);  //수정 해야함
+
+                    Intent in = new Intent(getApplicationContext(), MainActivity1.class);
+                    startActivity(in);
+                }
             }
         });
     }

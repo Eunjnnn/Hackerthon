@@ -6,15 +6,18 @@
     android:orientation="vertical"
     android:paddingLeft="12dp"
     android:paddingRight="12dp"
+    android:background="@drawable/background"
     tools:context=".MainActivity">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="40dp"
         android:text="LOGIN"
-        android:textSize="20sp"
+        android:textColor="#FF8787"
+        android:textSize="25sp"
+        android:textFontWeight="@android:integer/config_mediumAnimTime"
         android:layout_marginBottom="16dp"/>
 
     <ImageView
@@ -26,25 +29,21 @@
         android:layout_marginBottom="16dp"
         />
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
+        android:id="@+id/edittext_email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="ID"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginBottom="18dp"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress"/>
 
-    <com.google.android.material.textfield.TextInputLayout
+    <EditText
+        android:id="@+id/edittext_password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp">
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="Password"/>
-    </com.google.android.material.textfield.TextInputLayout>
+        android:layout_marginBottom="30dp"
+        android:hint="Password"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btn_login"
@@ -52,9 +51,9 @@
         android:layout_height="50dp"
         android:layout_gravity="center"
         android:text="Login"
-        android:background="@drawable/btn_blue"
+        android:background="#FF8787"
         android:textColor="#ffffff"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -62,14 +61,13 @@
         android:gravity="center"
         android:text="OR"
         android:textSize="15sp"
-        android:layout_marginBottom="16dp"/>
+        android:layout_marginBottom="10dp"/>
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/btn_google"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_gravity="center">
-
     </com.google.android.gms.common.SignInButton>
 
     <LinearLayout
@@ -79,21 +77,15 @@
         android:gravity="center"
         android:clickable="true"
         android:weightSum="10">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:background="#FFFFFF"
-            android:text="Find Password"
-            android:layout_weight="5"
-            android:textSize="18sp"/>
+
         <Button
             android:id="@+id/btn_signup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="Sign Up"
-            android:background="#FFFFFF"
+            android:background = "@android:color/transparent"
+            android:textColor="#FF8787"
             android:layout_weight="5"
             android:textSize="18sp"/>
     </LinearLayout>
