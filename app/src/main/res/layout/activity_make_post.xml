@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MakePostActivity">
+    tools:context=".MakePostActivity"
+    android:background="@drawable/background">
 
     <ImageView
         android:id="@+id/companyimage"
@@ -15,7 +16,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        app:srcCompat="@drawable/bag" />
+        app:srcCompat="@drawable/logo" />
 
     <Button
         android:id="@+id/button"
@@ -119,6 +120,8 @@
         android:layout_centerHorizontal="true"
         android:layout_below="@id/endDate"
         android:layout_marginTop="20dp"
+        android:background="#000000"
+        android:textColor="#ff8787"
         android:text="작성 완료" />
 
 

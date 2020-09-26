@@ -11,6 +11,8 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -67,16 +69,22 @@ public class ScoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference();
+                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+                String uId = user.getUid();
                 String reviewText = score_review_text.getText().toString();
                 Review sendReview = new Review(score_total_star.getRating(),
                          score_time_star.getRating(),
                         score_trust_star.getRating(),
-                        reviewText);
-                database.child("HostReview").push().setValue(sendReview);
+                        reviewText, uId);
+                database.child("HostReview").child(uId).push().setValue(sendReview);
 
 
                 //제출 감사 토스트 메세지
                 Toast.makeText(getApplicationContext(),"소중한 후기 작성 감사합니다 :)", Toast.LENGTH_SHORT).show();
+
+                Intent intent2List = new Intent(ScoreActivity.this, MainActivity1.class);
+                startActivity(intent2List);
 
             }
         });

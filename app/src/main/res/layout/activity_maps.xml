@@ -9,7 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="onLastLocationButtonClicked"
-        android:text="My Location"/>
+        android:text="My Location"
+        android:background="#000000"
+        android:textColor="#ff8787"/>
 
     <fragment
         android:id="@+id/map"
@@ -23,6 +25,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
-        android:text="Save" />
+        android:text="Save"
+        android:background="#000000"
+        android:textColor="#ff8787"/>
 
 </FrameLayout>

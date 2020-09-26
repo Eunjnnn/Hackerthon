@@ -1,19 +1,23 @@
 package com.example.samplesenti;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 public class Review {
 
     public double total;
     public double time;
     public double trust;
     public String review;
+    public String myUid;
 
     public Review(){}
 
-    public Review(double total, double time, double trust, String review){
+    public Review(double total, double time, double trust, String review, String myUid){
         this.total = total;
         this.time = time;
         this.trust = trust;
         this.review = review;
+        this.myUid = FirebaseAuth.getInstance().getUid();
     }
 
     public double getTotal() {
@@ -47,4 +51,8 @@ public class Review {
     public void setReview(String review) {
         this.review = review;
     }
+
+    public String getMyUid() { return myUid; }
+
+    public void setMyUid(String myUid) { this.myUid = myUid; }
 }

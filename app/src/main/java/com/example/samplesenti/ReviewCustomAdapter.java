@@ -9,16 +9,20 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import java.util.ArrayList;
 
 public class ReviewCustomAdapter extends RecyclerView.Adapter<ReviewCustomAdapter.CustomViewHolder> {
     private ArrayList<Review> arrayList;
     private Context context;
+    private String myUid;
 
 
     public ReviewCustomAdapter(ArrayList<Review> arrayList, ReviewRecyclerView mainActivity) {
         this.arrayList = arrayList;
         this.context = context;
+        myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
     @NonNull
@@ -31,6 +35,7 @@ public class ReviewCustomAdapter extends RecyclerView.Adapter<ReviewCustomAdapte
 
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
+        final String uid = arrayList.get(position).getMyUid();
         holder.tv_total.setText(String.valueOf(arrayList.get(position).getTotal()));
         holder.tv_time.setText(String.valueOf(arrayList.get(position).getTime()));
         holder.tv_trust.setText(String.valueOf(arrayList.get(position).getTrust()));
