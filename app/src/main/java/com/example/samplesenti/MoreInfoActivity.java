@@ -28,12 +28,22 @@ public class MoreInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_more_info);
 
         Button button = (Button)findViewById(R.id.btn_vibrate);
+        Button moreInfo_profile = (Button)findViewById(R.id.moreInfo_profile);
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v){
                 Vibrator vibrator = (Vibrator)getSystemService(Context.VIBRATOR_SERVICE);
                 vibrator.vibrate(1000);
                 showNoti();
+            }
+        });
+
+        moreInfo_profile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MoreInfoActivity.this, ReviewRecyclerView.class);
+                startActivity(intent);
             }
         });
     }

@@ -2,9 +2,11 @@ package com.example.samplesenti;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -61,5 +63,16 @@ public class ReviewRecyclerView extends AppCompatActivity {
 
         adapter = new ReviewCustomAdapter(arrayList, this);
         recyclerView.setAdapter(adapter); //리사이클러뷰에 어댑터 연결
+
+        DividerItemDecoration dividerItemDecoration =
+                new DividerItemDecoration(recyclerView.getContext(),new LinearLayoutManager(this).getOrientation());
+        // 리싸이클러뷰 구분선
+        recyclerView.addItemDecoration(dividerItemDecoration);
+        // 구분선 추가
+
+        RecyclerDecoration spaceDecoration = new RecyclerDecoration(30);
+        recyclerView.addItemDecoration(spaceDecoration);
+
+        Intent intent = getIntent();
     }
 }

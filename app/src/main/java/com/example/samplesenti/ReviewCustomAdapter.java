@@ -36,10 +36,10 @@ public class ReviewCustomAdapter extends RecyclerView.Adapter<ReviewCustomAdapte
     @Override
     public void onBindViewHolder(@NonNull CustomViewHolder holder, int position) {
         final String uid = arrayList.get(position).getMyUid();
-        holder.tv_total.setText(String.valueOf(arrayList.get(position).getTotal()));
-        holder.tv_time.setText(String.valueOf(arrayList.get(position).getTime()));
-        holder.tv_trust.setText(String.valueOf(arrayList.get(position).getTrust()));
-        holder.tv_sentence.setText(String.valueOf(arrayList.get(position).getReview()));
+        holder.tv_total.setText("총점 : " +String.valueOf(arrayList.get(position).getTotal()));
+        holder.tv_time.setText("응답시간 : " +String.valueOf(arrayList.get(position).getTime()));
+        holder.tv_trust.setText("신뢰도 : " +String.valueOf(arrayList.get(position).getTrust()));
+        holder.tv_sentence.setText("한줄평 : " +String.valueOf(arrayList.get(position).getReview()));
 
     }
 
