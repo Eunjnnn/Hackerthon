@@ -35,7 +35,7 @@
             android:layout_gravity="center"
             android:orientation="vertical">
 
-            <Button
+            <ImageButton
                 android:id="@+id/moreInfo_profile"
                 android:layout_width="100sp"
                 android:layout_height="100sp"

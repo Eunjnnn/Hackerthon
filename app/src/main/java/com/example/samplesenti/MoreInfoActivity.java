@@ -9,15 +9,26 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-public class MoreInfoActivity extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
+public class MoreInfoActivity extends AppCompatActivity {
+    private FirebaseDatabase firebaseDatabase=FirebaseDatabase.getInstance();
+    private DatabaseReference databaseReference = firebaseDatabase.getReference();
     NotificationManager manager;
 
     private static String CHANNEL_ID = "channel1";
@@ -29,8 +40,29 @@ public class MoreInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_more_info);
 
         Button button = (Button)findViewById(R.id.btn_vibrate);
-        Button moreInfo_profile = (Button)findViewById(R.id.moreInfo_profile);
+        ImageButton moreInfo_profile = (ImageButton)findViewById(R.id.moreInfo_profile);
         Button btn_plus = (Button)findViewById(R.id.btn_plus);
+        TextView namee=(TextView)findViewById(R.id.moreInfo_host_name);
+
+        String uid, name, email;
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            // Name, email address, and profile photo Url
+            name = user.getDisplayName();
+            email = user.getEmail();
+            Uri photoUrl = user.getPhotoUrl();
+
+            moreInfo_profile.setImageURI(photoUrl);
+            namee.setText(name);
+            // Check if user's email is verified
+            boolean emailVerified = user.isEmailVerified();
+
+            // The user's ID, unique to the Firebase project. Do NOT use this value to
+            // authenticate with your backend server, if you have one. Use
+            // FirebaseUser.getIdToken() instead.
+            uid = user.getUid();
+
+        }
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

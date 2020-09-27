@@ -156,7 +156,7 @@ public class MainActivity1 extends AppCompatActivity{
                     str4 = et4.getText().toString();
                     //  databaseReference.child("content").setValue(uid);
                     Post post = new Post(str1, str2, str3, str4);
-                    databaseReference.child("content").child("content").push().setValue(post); //넣기
+                    databaseReference.push().setValue(post); //넣기
                 }
             }
         });
@@ -169,8 +169,8 @@ public class MainActivity1 extends AppCompatActivity{
                     //    String key = messageData.getKey();
                     Post get = messageData.getValue(Post.class);
                     //   String[] info = {get.minMoney, get.maxUser, get.moreInfo, get.endDate};
-                    String result = get.minMoney+"   "+get.maxUser+"   "+get.moreInfo+"   "+get.endDate;
-                    Array.add(result);
+                    String result = "최소금액:"+get.minMoney+" 최대구매자:"+get.maxUser+" 기타: "+get.moreInfo+" 기한:"+get.endDate;
+                    //Array.add(result);
                     adapter.add(result);
                     // child 내에 있는 데이터만큼 반복합니다.
                 }
