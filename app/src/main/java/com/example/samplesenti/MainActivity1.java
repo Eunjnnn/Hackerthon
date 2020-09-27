@@ -72,9 +72,6 @@ public class MainActivity1 extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main1);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         sendbt=(Button) findViewById(R.id.btnFinish2);
         et1=(EditText) findViewById(R.id.minMoney2);
         et2=(EditText) findViewById(R.id.maxUser2);
