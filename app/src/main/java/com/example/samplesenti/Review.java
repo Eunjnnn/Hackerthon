@@ -8,16 +8,16 @@ public class Review {
     public double time;
     public double trust;
     public String review;
-    public String myUid;
+   // public String myUid;
 
     public Review(){}
 
-    public Review(double total, double time, double trust, String review, String myUid){
+    public Review(double total, double time, double trust, String review){
         this.total = total;
         this.time = time;
         this.trust = trust;
         this.review = review;
-        this.myUid = FirebaseAuth.getInstance().getUid();
+        //this.myUid = FirebaseAuth.getInstance().getUid();
     }
 
     public double getTotal() {
@@ -52,7 +52,4 @@ public class Review {
         this.review = review;
     }
 
-    public String getMyUid() { return myUid; }
-
-    public void setMyUid(String myUid) { this.myUid = myUid; }
 }

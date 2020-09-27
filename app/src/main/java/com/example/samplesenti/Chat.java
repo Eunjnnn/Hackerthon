@@ -1,7 +1,16 @@
 package com.example.samplesenti;
 
 public class Chat {
+    String email;
     String text;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
     public String getText() {
         return text;

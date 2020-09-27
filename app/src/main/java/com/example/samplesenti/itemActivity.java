@@ -1,5 +1,7 @@
 package com.example.samplesenti;
 
+import android.content.ClipData;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -9,10 +11,11 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class itemActivity extends AppCompatActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.itemhost);
     }
 
     public void optionClick(View v) {
@@ -30,6 +33,8 @@ public class itemActivity extends AppCompatActivity {
                         break;
                     case R.id.m3:
                         Toast.makeText(getApplication(),"종료",Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getApplicationContext(),ChatActivity.class);
+                        startActivity(intent);
                         break;
                     default:
                         break;

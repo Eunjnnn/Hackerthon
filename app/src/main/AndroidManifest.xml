@@ -45,18 +45,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MakePostActivity" />
         <activity android:name=".ChatActivity" />
         <activity android:name=".AfterGoogleSignIn" />
         <activity android:name=".SignUpActivity" />
-        <activity android:name=".itemActivity" />
-        <activity android:name=".itemcActivity" />
+        <activity android:name=".itemActivity" >
+        </activity>
         <activity
             android:name=".MainActivity1"
             android:label="MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MainActivity"/>
-        <activity android:name=".MainActivity__" />
     </application>
 
 </manifest>

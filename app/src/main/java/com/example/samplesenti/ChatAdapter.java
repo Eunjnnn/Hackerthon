@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.samplesenti.Chat;
+import com.example.samplesenti.R;
+
 import java.util.ArrayList;
 
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> {
@@ -27,7 +30,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
 
     /* @Override
     public int getItemViewType(int position) {
-        if (mDataset.get(position).email.equels(stMyEmail)) {
+//        return super.getItemViewType(position);
+        if (mDataset.get(position).email.equals(stMyEmail)) {
             return 1;
         } else {
             return 2;
@@ -35,8 +39,9 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     } */
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public ChatAdapter(ArrayList<Chat> myDataset) {
+    public ChatAdapter(ArrayList<Chat> myDataset, String stEmail) {
         mDataset = myDataset;
+        this.stMyEmail = stEmail;
     }
 
     // Create new views (invoked by the layout manager)
@@ -44,10 +49,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.MyViewHolder> 
     public ChatAdapter.MyViewHolder onCreateViewHolder(ViewGroup parent,
                                                        int viewType) {
         // create a new view
-        View v = (View) LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.right_text_view, parent, false);
-        if (viewType == 1) {
-            v = (View) LayoutInflater.from(parent.getContext())
+        View v =  LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.my_text_view, parent, false);
+        if(viewType == 1){
+            v =  LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.right_text_view, parent, false);
         }
 

@@ -14,6 +14,7 @@ import android.os.Bundle;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class MoreInfoActivity extends AppCompatActivity {
 
@@ -29,6 +30,7 @@ public class MoreInfoActivity extends AppCompatActivity {
 
         Button button = (Button)findViewById(R.id.btn_vibrate);
         Button moreInfo_profile = (Button)findViewById(R.id.moreInfo_profile);
+        Button btn_plus = (Button)findViewById(R.id.btn_plus);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,6 +46,14 @@ public class MoreInfoActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(MoreInfoActivity.this, ReviewRecyclerView.class);
                 startActivity(intent);
+            }
+        });
+        Intent intent1 = getIntent();
+
+        btn_plus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(getApplicationContext(),"신청 완료되었습니다 :)", Toast.LENGTH_SHORT).show();
             }
         });
     }

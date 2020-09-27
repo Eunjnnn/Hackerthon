@@ -38,7 +38,6 @@ public class ScoreActivity extends AppCompatActivity {
 
         final EditText score_review_text = (EditText)findViewById(R.id.score_review_text);
         Button score_submit = (Button)findViewById(R.id.score_submit);
-        Button button = (Button)findViewById(R.id.button);
 
         //총점 별점 표시
         score_total_star.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
@@ -69,15 +68,15 @@ public class ScoreActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 DatabaseReference database = FirebaseDatabase.getInstance().getReference();
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+                //FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-                String uId = user.getUid();
+                //String uId = user.getUid();
                 String reviewText = score_review_text.getText().toString();
                 Review sendReview = new Review(score_total_star.getRating(),
                          score_time_star.getRating(),
                         score_trust_star.getRating(),
-                        reviewText, uId);
-                database.child("HostReview").child(uId).push().setValue(sendReview);
+                        reviewText);
+                database.child("HostReview").push().setValue(sendReview);
 
 
                 //제출 감사 토스트 메세지
@@ -89,12 +88,5 @@ public class ScoreActivity extends AppCompatActivity {
             }
         });
 
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ScoreActivity.this, MoreInfoActivity.class);
-                startActivity(intent);
-            }
-        });
     }
 }

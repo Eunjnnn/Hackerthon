@@ -17,8 +17,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import org.w3c.dom.Comment;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -31,54 +29,42 @@ public class ChatActivity extends AppCompatActivity {
     private RecyclerView.LayoutManager layoutManager;
     EditText etText;
     Button btnSend;
-    // String stEmail;
+    String stEmail;
     FirebaseDatabase database;
     ArrayList<Chat> chatArrayList;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
         database = FirebaseDatabase.getInstance();
 
-        chatArrayList = new ArrayList<>(); // chat 모델을 나열하는 배열
-
-        // stEmail = getIntent().getStringExtra("email");
-
-        etText = (EditText) findViewById(R.id.etText);
-        btnSend = (Button) findViewById(R.id.btnSend);
-        btnSend.setOnClickListener(new View.OnClickListener() {
+        chatArrayList = new ArrayList<>();
+        stEmail = getIntent().getStringExtra("email");
+        Button btnFinish = (Button) findViewById(R.id.btnFinish);
+        btnFinish.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                String stText = etText.getText().toString();
-
-                Calendar c = Calendar.getInstance();
-                SimpleDateFormat dateformat = new SimpleDateFormat("yyyy--MM--dd hh:mm:ss");
-                String datetime = dateformat.format(c.getTime());
-
-                DatabaseReference myRef = database.getReference("message").child(datetime);
-
-                Hashtable<String, String> ch = new Hashtable <String, String>();
-                ch.put("text", stText);
-
-                myRef.setValue(ch);
+            public void onClick(View v) {
+                finish();
             }
         });
+        btnSend = (Button)findViewById(R.id.btnSend);
+        etText = (EditText) findViewById(R.id.etText);
 
         recyclerView = (RecyclerView) findViewById(R.id.my_recycler_view);
 
         // use this setting to improve performance if you know that changes
         // in content do not change the layout size of the RecyclerView
-        recyclerView.setHasFixedSize(true); // 목록의 높이 너비 고정
+        recyclerView.setHasFixedSize(true);
 
         // use a linear layout manager
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
         // specify an adapter (see also next example)
-        String[] myDataset = {"t1", "t2", "t3", "t4"};
-        mAdapter = new ChatAdapter(chatArrayList);
+        String[] myDataset = {"test1","test2","test3","test4"};
+        mAdapter = new ChatAdapter(chatArrayList, stEmail);
         recyclerView.setAdapter(mAdapter);
+
 
         ChildEventListener childEventListener = new ChildEventListener() {
             @Override
@@ -88,12 +74,12 @@ public class ChatActivity extends AppCompatActivity {
                 // A new comment has been added, add it to the displayed list
                 Chat chat = dataSnapshot.getValue(Chat.class);
                 String commentKey = dataSnapshot.getKey();
-
+                String stEmail = chat.getEmail();
                 String stText = chat.getText();
-                Log.d(TAG, "stText: " + stText);
+                Log.d(TAG, "stEmail: "+stEmail);
+                Log.d(TAG, "stText: "+stText);
                 chatArrayList.add(chat);
                 mAdapter.notifyDataSetChanged();
-                // ...
             }
 
             @Override
@@ -125,6 +111,7 @@ public class ChatActivity extends AppCompatActivity {
                 // A comment has changed position, use the key to determine if we are
                 // displaying this comment and if so move it.
 
+
                 // ...
             }
 
@@ -135,8 +122,32 @@ public class ChatActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         };
-
         DatabaseReference ref = database.getReference("message");
         ref.addChildEventListener(childEventListener);
+
+        btnSend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                String stText = etText.getText().toString();
+                Toast.makeText(ChatActivity.this, "MSG : "+stText,Toast.LENGTH_LONG).show();
+
+
+                Calendar c = Calendar.getInstance();
+                SimpleDateFormat dateformat = new SimpleDateFormat("yyyy-MM--dd hh:mm:ss");
+                String datetime = dateformat.format(c.getTime());
+
+                DatabaseReference myRef = database.getReference("message").child(datetime);
+
+                Hashtable<String, String> ch
+                        = new Hashtable<String, String>();
+                ch.put("email", stEmail);
+                ch.put("text", stText);
+
+                myRef.setValue(ch);
+            }
+        });
+
     }
 }
